@@ -1,0 +1,46 @@
+CREATE DATABASE expense_mgmt;
+
+CREATE TABLE employees (
+    emp_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    role VARCHAR(50)
+);
+INSERT INTO employees (name, department, role) VALUES
+('Sheshita', 'IT', 'Employee'),
+('Amit', 'Finance', 'Manager'),
+('Riya', 'Sales', 'Employee'),
+('Karan', 'Finance', 'Finance');
+
+SELECT * FROM employees;
+
+
+CREATE TABLE expenses (
+    expense_id SERIAL PRIMARY KEY,       -- unique id for each expense
+    emp_id INT REFERENCES employees(emp_id), -- link to employee who submitted
+    expense_type VARCHAR(50),            -- type of expense (Travel, Food, Hotel)
+    amount DECIMAL(10,2),                -- expense amount with 2 decimals
+    expense_date DATE,                   -- date of expense
+    status VARCHAR(20) DEFAULT 'Pending' -- default status = Pending
+);
+INSERT INTO expenses (emp_id, expense_type, amount, expense_date) VALUES
+(1, 'Travel', 5000, '2025-09-01'),
+(3, 'Food', 1200, '2025-09-02'),
+(1, 'Hotel', 3500, '2025-09-03');
+
+SELECT * FROM expenses;
+
+
+CREATE TABLE approvals (
+    approval_id SERIAL PRIMARY KEY,          -- unique id for each approval
+    expense_id INT REFERENCES expenses(expense_id), -- link to expense
+    manager_id INT REFERENCES employees(emp_id),   -- manager who approved/rejected
+    approval_status VARCHAR(20),             -- Approved / Rejected
+    approval_date DATE                       -- when action was taken
+);
+
+INSERT INTO approvals (expense_id, manager_id, approval_status, approval_date) VALUES
+(1, 2, 'Approved', '2025-09-04'),
+(2, 2, 'Rejected', '2025-09-04');
+
+SELECT * FROM approvals;

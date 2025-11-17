@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "44d36edc-52cb-4700-b33c-9088586b9367",
+		"name": "Expense Reimbursement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43727990",
+		"_collection_link": "https://sheshitaupadhyay.postman.co/workspace/API-Testing-Project-%E2%80%93-July-2025~02bb1d06-7ae1-43da-84ed-cc3cd9e10c8a/collection/43727990-44d36edc-52cb-4700-b33c-9088586b9367?action=share&source=collection_link&creator=43727990"
+	},
+	"item": [
+		{
+			"name": "get emp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an(\"array\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/employees",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get emp example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\r\n  {\r\n    \"employeeId\": 1,\r\n    \"name\": \"Sheshita\",\r\n    \"role\": \"Tester\"\r\n  },\r\n  {\r\n    \"employeeId\": 2,\r\n    \"name\": \"Anya\",\r\n    \"role\": \"Manager\"\r\n  }\r\n]\r\n"
+				}
+			]
+		},
+		{
+			"name": "POST Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Employee created message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Employee created successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"employeeId\": 3,\r\n  \"name\": \"Rahul\",\r\n  \"role\": \"Finance\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/employees",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST Employee example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"employeeId\": 3,\r\n  \"name\": \"Rahul\",\r\n  \"role\": \"Finance\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/employees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Employee created successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "put employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Employee update message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Employee updated successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Rahul Sharma\",\r\n  \"role\": \"Finance Manager\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/employees/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"employees",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "put employee example",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Employee updated successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "DELETE Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Employee delete message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Employee deleted successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/employees/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"employees",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE Employee example",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Employee deleted successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "GET Expenses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an(\"array\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/expenses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET Expenses example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/expenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expenses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\r\n  {\r\n    \"expenseId\": 1,\r\n    \"employeeId\": 1,\r\n    \"amount\": 500,\r\n    \"type\": \"Travel\",\r\n    \"status\": \"Pending\"\r\n  },\r\n  {\r\n    \"expenseId\": 2,\r\n    \"employeeId\": 2,\r\n    \"amount\": 1000,\r\n    \"type\": \"Hotel\",\r\n    \"status\": \"Approved\"\r\n  }\r\n]\r\n"
+				}
+			]
+		},
+		{
+			"name": "POST Expense",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"expenseId\": 3,\r\n  \"employeeId\": 1,\r\n  \"amount\": 200,\r\n  \"type\": \"Food\",\r\n  \"status\": \"Pending\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/expenses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST Expense example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"expenseId\": 3,\r\n  \"employeeId\": 1,\r\n  \"amount\": 200,\r\n  \"type\": \"Food\",\r\n  \"status\": \"Pending\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expenses"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Expense created successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "PUT Expense",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 250,\r\n  \"type\": \"Food\",\r\n  \"status\": \"Approved\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/expenses/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"expenses",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PUT Expense example",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/expenses/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expenses",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Expense updated successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "DELETE Expense",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/expenses/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"expenses",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE Expense example",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/expenses/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expenses",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Expense deleted successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "GET Approvals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/approvals",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"approvals"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET Approvals example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/approvals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\r\n  {\r\n    \"approvalId\": 1,\r\n    \"expenseId\": 1,\r\n    \"managerId\": 2,\r\n    \"status\": \"Pending\"\r\n  }\r\n]\r\n"
+				}
+			]
+		},
+		{
+			"name": "POST Approval",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"approvalId\": 2,\r\n  \"expenseId\": 3,\r\n  \"managerId\": 2,\r\n  \"status\": \"Approved\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/approvals",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"approvals"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST Approval example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"approvalId\": 2,\r\n  \"expenseId\": 3,\r\n  \"managerId\": 2,\r\n  \"status\": \"Approved\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/approvals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Approval added successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "PUT Approval",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": \"Rejected\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/approvals/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"approvals",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PUT Approval example",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"Rejected\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/approvals/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Approval updated successfully\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "DELETE Approval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Approval delete message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Approval deleted successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/approvals/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"approvals",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE Approval example",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/approvals/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"message\": \"Approval deleted successfully\"\r\n}\r\n"
+				}
+			]
+		}
+	]
+}
